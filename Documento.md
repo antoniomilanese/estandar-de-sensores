@@ -154,13 +154,13 @@ En todos los casos la proyección de los datos geográficos será WGS84 (epsg pr
 
 # Unidades
 
-Variable
-UnidadTemperatura
-°C (Grados Celsius)Humedad
-% (valor numérico)Presión
-BarLuz
-LuxRuido
-dB (decibeles)
+|Variable|Unidad
+|--------------|-------------|
+|Temperatura|°C (Grados Celsius)|
+|Humedad|% (valor numérico)|
+|Presión|Bar|
+|Luz|Lux
+|Ruido|dB (decibeles)
 
 (Siguiendo estándar SIMELA excepto en el caso de LUX)
 
