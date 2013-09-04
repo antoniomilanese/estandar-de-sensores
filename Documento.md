@@ -26,7 +26,7 @@ El siguiente documento presenta un estándar de mínima, es decir que se exige q
 **Estructura funcional**
 
 El estándar se basa en una estructura que contempla un protocolo de comunicación único para que todos los sensores que se conecten a la DB para dejar sus registros en tiempo real y al FTP para dejar sus logs históricos.!
-Incluir Imágen
+"Imagen"
 
 Básicamente, la estructura funcional del sistema físico de sensorización de la Ciudad de Buenos Aires debe dividirse en dos partes interconectadas: capa física y capa lógica.
 
@@ -39,8 +39,9 @@ Básicamente, la estructura funcional del sistema físico de sensorización de l
 La base de datos debe componerse de un conjunto de tablas que permitan obtener la información de localización de los sensores, información del tipo de sensor (estático o móvil, variable de medición) los valores agrupados por tipo (temperatura, humedad, presión, ruido, etc). 
 
 **Diagrama de la base de datos v.0.1**
+![alt text](https://github.com/antoniomilanese/estandar-de-sensores/blob/926a5d4e5c3cb1fb3165c3da13e7e4147f5314b0/db.png "Logo Title Text 1")
 
-Incluir Imágen
+[https://github.com/antoniomilanese/estandar-de-sensores/blob/926a5d4e5c3cb1fb3165c3da13e7e4147f5314b0/db.png]:
 
 # Formato de los eventos de sensores
 
