@@ -3,8 +3,6 @@ Estándar para datos de sensores (lite)
 
 *Abstract: **el documento detalla cómo debe ser la estructura de los datos generados por cada sensor que pertenezca a la red de sensorización de la Ciudad Autónoma de Buenos Aires.*
 
-[[TOC]]
-
 # Antecedentes
 
 Existen en la ciudad distintas áreas trabajando con diversos sensores. Esta información es capturada de manera ad-hoc utilizando diversos softwares y estándares muchas veces no homologados. Esta situación no sólo dificulta la integración de los datos sino que imposibilita contar con información precisa y, eventualmente crítica, en los tiempos requeridos. 
@@ -27,7 +25,8 @@ El siguiente documento presenta un estándar de mínima, es decir que se exige q
 
 **Estructura funcional**
 
-El estándar se basa en una estructura que contempla un protocolo de comunicación único para que todos los sensores que se conecten a la DB para dejar sus registros en tiempo real y al FTP para dejar sus logs históricos.![image alt text](image_0.png)
+El estándar se basa en una estructura que contempla un protocolo de comunicación único para que todos los sensores que se conecten a la DB para dejar sus registros en tiempo real y al FTP para dejar sus logs históricos.!
+Incluir Imágen
 
 Básicamente, la estructura funcional del sistema físico de sensorización de la Ciudad de Buenos Aires debe dividirse en dos partes interconectadas: capa física y capa lógica.
 
@@ -41,7 +40,7 @@ La base de datos debe componerse de un conjunto de tablas que permitan obtener l
 
 **Diagrama de la base de datos v.0.1**
 
-![image alt text](image_1.png)
+Incluir Imágen
 
 # Formato de los eventos de sensores
 
@@ -51,104 +50,59 @@ La base de datos debe componerse de un conjunto de tablas que permitan obtener l
 
 En la siguiente tabla se listan los tipos de datos que se usarán en los campos de la base de datos:
 
-Temporales
-Numéricos
-Cadena de caracteresDATETIME
-NULL
-CHARDATE
-AUTO_INCREMENT
-VARCHARTIMESTAMP
-SERIAL
-BINARYTIMESTAMP (with time zone)
-BIT[(M)]
-VARBINARY
-TINYINT[(M)]
-BLOB
-BOOL, BOOLEAN
-TEXT
-SMALLINT[(M)]
-ENUM
-MEDIUMINT[(M)]
-SET
-INT[(M)]
-
-INTEGER[(M)]
-
-BIGINT[(M)]
-
-FLOAT(p) - BINARY_FLOAT
-
-FLOAT[(M,D)]
-
-DOUBLE[(M,B)]- BINARY_DOUBLE
-
-DECIMAL[(M[,D])]
+| Temporales | Numéricos | Cadena de caracteres |
+| ---------- | --------- | -------------------- |
+|  DATETIME  | NULL | CHAR|
+|DATE|AUTO_INCREMENT|VARCHAR
+|TIMESTAMP|SERIAL|BINARY| 
+|TIMESTAMP (with time zone)|BIT[(M)]|VARBINARY | 
+| |TINYINT[(M)] | BLOB
+| |BOOL, BOOLEAN|TEXT|
+| |SMALLINT[(M)]|ENUM|
+| |MEDIUMINT[(M)]|SET|
+| |INT[(M)]|
+| |INTEGER[(M)]
+| |BIGINT[(M)]
+| |FLOAT(p) - BINARY_FLOAT
+| |FLOAT[(M,D)]
+| |DOUBLE[(M,B)]- BINARY_DOUBLE
+| |DECIMAL[(M[,D])]
 
 
 ### Estructura de datos temporales
 
 Los tipos a usar para los campos temporales son DATETIME, DATE, y TIMESTAMP. Estos formatos están relacionados debido a que son medidas temporales, sin embargo, tienen diferentes usos.
 
-### Formato válido para datos temporales (NOTE:  Los valores ilegales de DATETIME, DATE, o TIMESTAMP se convierten en la base de datos al valor "cero" del tipo apropiado ('0000-00-00 00:00:00', '0000-00-00', o 00000000000000).)
+### Formato válido para datos temporales 
+*Nota: **Los valores ilegales de DATETIME, DATE, o TIMESTAMP se convierten en la base de datos al valor "cero" del tipo apropiado ('0000-00-00 00:00:00', '0000-00-00', o 00000000000000).)
 
-Tipo de dato
-Formato de envio
-Formato en DBDATETIME
-'98-12-31 11:30:45',
-'98.12.31 11+30+45',
-'98/12/31 11*30*45', '98@12@31 11^30^45'
-YYYY-MM-DD HH:MM:SS
-YY-MM-DD HH:MM:SSDATE
-'19970523'
-'970523'
-YYYYMMDD
-YYMMDDDATE, DATETIME y TIMESTAMP
-(Preferentemente TIMESTAMP)
-
-NOW()
-CURRENT_DATE
+|Tipo de dato|Formato de envio|Formato en DB|
+|------------|----------------|-------------|
+|DATETIME|'98-12-31 11:30:45',
+| |'98.12.31 11+30+45',|YYYY-MM-DD HH:MM:SS|
+| |'98/12/31 11*30*45',|YYYY-MM-DD HH:MM:SS
+| |'98@12@31 11^30^45'
+|DATE|'19970523'|YYYYMMDD
+||'970523'| YYYYMMDD
+|YYMMDDDATE, DATETIME y TIMESTAMP (Preferentemente TIMESTAMP)| |NOW() CURRENT_DATE|
 
 ## Estructura de datos numéricos
 
 Se soportan formatos SQL numéricos estándar. Estos tipos incluyen los tipos numéricos exactos (INTEGER, SMALLINT, DECIMAL, y NUMERIC), así como los tipos de datos aproximados (FLOAT, REAL, y DOUBLE PRECISION).
 
-Tipo
-Bytes
-Valor mínimo
-Valor máximo
-
-(Con signo/Sin signo)
-(Con signo/Sin signo)TINYINT
-1
--128
-127
-
-0
-255SMALLINT
-2
--32768
-32767
-
-0
-65535MEDIUMINT
-3
--8388608
-8388607
-
-0
-16777215INT
-4
--2147483648
-2147483647
-
-0
-4294967295BIGINT
-8
--9223372036854775808
-9223372036854775807
-
-0
-18446744073709551615
+|Tipo|Bytes|Valor mínimo|Valor máximo|
+|----|-----|------------|------------|
+| | |(Con signo/Sin signo)|(Con signo/Sin signo)
+|TINYINT|1|-128|127
+| | |0|255|
+|SMALLINT|2|-32768|32767|
+| | |0|65535|
+|MEDIUMINT|3|-8388608|8388607|
+| | |0|16777215|
+|INT|4|-2147483648|2147483647|
+| | |0|4294967295|
+|BIGINT|8|-9223372036854775808|9223372036854775807|
+| | |0|18446744073709551615|
 
 ## Estructura de datos espaciales
 
